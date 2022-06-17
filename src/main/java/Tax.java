@@ -1,14 +1,14 @@
-import java.util.concurrent.atomic.AtomicLong;
+import java.util.concurrent.atomic.LongAdder;
 
 public class Tax {
-    AtomicLong revenue = new AtomicLong(0);
+    private LongAdder revenue = new LongAdder();
 
     public void transfer(long diff) {
         System.out.printf("%s provided a report in the amount of %d rubles \n", Thread.currentThread().getName(), diff);
-        revenue.addAndGet(diff);
+        revenue.add(diff);
     }
 
     public long getAmount() {
-        return revenue.get();
+        return revenue.longValue();
     }
 }
